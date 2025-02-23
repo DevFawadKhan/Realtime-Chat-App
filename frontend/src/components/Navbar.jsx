@@ -2,9 +2,7 @@
 
 function Navbar() {
   return (
-    <div>
-      
-    </div>
+    <><h1>Navbar</h1></>
   )
 }
 
