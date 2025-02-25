@@ -66,7 +66,7 @@ export const Login=async (req,res)=>{
 // Logout Logic
 export const Logout=(req,res)=>{
  try {
-    res.cookie("jwt","",{maxAge:0}); //(empty string): Iska matlab hai ke cookie ki value empty kar di.
+    res.cookie("token","",{maxAge:0}); //(empty string): Iska matlab hai ke cookie ki value empty kar di.
     res.status(200).json({message:"Loggout successfully"});
  } catch (error) {
     console.log("Error in Logout controller ",error.message);
