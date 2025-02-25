@@ -31,7 +31,8 @@ if(isCheckingAuth&&!authUser){
   <Route path="/login" element={!authUser?<LogInPage/>:<Navigate to="/"/>}/>
   <Route path="/signup" element={!authUser?<SignUpPage/>:<Navigate to="/"/>}/>
   <Route path="/setting" element={<SettingPage/>}/>
-  <Route path="/profile" element={authUser?<ProfilePage/>:<Navigate to="/login"/>}/>
+  {/* <Route path="/profile" element={authUser?<ProfilePage/>:<Navigate to="/login"/>}/> */}
+  <Route path="/profile" element={<ProfilePage/>}/>
 </Routes>
 <Toaster></Toaster>
     </>

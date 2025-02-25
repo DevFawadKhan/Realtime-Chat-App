@@ -50,5 +50,8 @@ export const useAuthStore=create((set)=>({
         console.log("Error is Logout response",error);
         toast.error(error.response.data.message);
        }
-     }
+     },
+   //   Upload profile
+   UploadProfile:async()=>{
+   }
 }))
