@@ -5,7 +5,7 @@ import { Login, Logout, Signup,UpdateProfile,Check } from '../controller/Auth.co
 router.post('/signup',Signup)
 router.post('/login',Login)
 router.post('/logout',Logout)
-router.put("/update-profile",protectRoute,UpdateProfile)
+router.put("/updateprofile",protectRoute,UpdateProfile)
 router.get("/check",protectRoute,Check)
 
 export default router;
