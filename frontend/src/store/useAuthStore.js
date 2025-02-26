@@ -6,7 +6,6 @@ export const useAuthStore=create((set)=>({
     // isSignUp:false,
     // isLoggingIn:false,
     isUpdatingProfile:false,
-
     isCheckingAuth:true,
     // function for check user is authentic or not call api
      checkAuth:async()=>{
@@ -52,6 +51,17 @@ export const useAuthStore=create((set)=>({
        }
      },
    //   Upload profile
-   UploadProfile:async()=>{
+   UploadProfile:async(data)=>{
+      set({isUpdatingProfile:true})
+      try {
+         const res=await axiosInstance.put("/auth/updateprofile",data)
+         toast.success("Profile Upload sucessfully");
+         set({authUser:res.data});
+      } catch (error) {
+       console.log("Error is UploadProfile response",error);
+        toast.error(error.response.data.message);
+      }finally{
+         set({isUpdatingProfile:false})
+      }
    }
 }))

@@ -8,7 +8,8 @@ export default {
     }
    }
   },
-  plugins: [
-    daisyui,
-  ],
-}
+  plugins: [daisyui,],
+  daisyui:{
+    themes:["light","dark","cupcake","retro"]
+  }
+};
