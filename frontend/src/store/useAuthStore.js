@@ -3,8 +3,8 @@ import { axiosInstance } from '../lib/axios.js'
 import toast from 'react-hot-toast';
 export const useAuthStore=create((set)=>({
     authUser:null, // Initially user logged in nahi ha initial state.
-    // isSignUp:false,
-    // isLoggingIn:false,
+    isSignUp:false,
+    isLoggingIn:false,
     isUpdatingProfile:false,
     isCheckingAuth:true,
     // function for check user is authentic or not call api
@@ -24,18 +24,21 @@ export const useAuthStore=create((set)=>({
     //  Signup Api call
      signup:async(data)=>{
       const  {name,email,password}=data
+      set({isSignUp:true})
      try {
-        const res=await axiosInstance.post("/auth/signup",{
-          name:name,
-          email:email,
-          password:password,
-        })
-        toast.success("Account Created Successfully");
-        console.log(res.data);
+         const res=await axiosInstance.post("/auth/signup",{
+         name:name,
+         email:email,
+         password:password,
+      })
+      toast.success("Account Created Successfully");
+      console.log(res.data);
         set({authUser:res.data});
      } catch (error) {
-        console.log("Error is Signup response",error);
-        toast.error(error.response.data.message);
+      console.log("Error is Signup response",error);
+      toast.error(error.response.data.message);
+     }finally{
+      set({isSignUp:false})
      }
      },
     //  Logout Api call
@@ -63,5 +66,22 @@ export const useAuthStore=create((set)=>({
       }finally{
          set({isUpdatingProfile:false})
       }
+   },
+   // Login Api call 
+   Login:async(email,password)=>{
+      set({isLoggingIn:true})
+   try {
+      const res=await axiosInstance.post("/auth/login",{
+         email:email,
+         password:password,
+      })
+      toast.success("Login successfull!");
+      set({authUser:res.data});
+   } catch (error) {
+      console.log("Error is LogIn response",error);
+      toast.error(error.response.data.message);
+   }finally{
+      set({isLoggingIn:false});
+   }
    }
 }))

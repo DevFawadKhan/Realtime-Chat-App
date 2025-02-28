@@ -6,15 +6,15 @@ import ProfilePage from './pages/ProfilePage.jsx'
 import SettingPage from './pages/SettingPage.jsx'
 import LogInPage  from './pages/LogInPage.jsx'
 import { useAuthStore } from "./store/useAuthStore.js"
-import { useEffect,useState } from "react"
+import { useEffect } from "react"
 import {Loader} from 'lucide-react'
 import {Toaster} from 'react-hot-toast'
 function App() {
-  const [theme, setTheme] = useState("cupcake");
+  // const [theme, setTheme] = useState("cupcake");
 
-  useEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme);
-  }, [theme]);
+  // useEffect(() => {
+  //   document.documentElement.setAttribute("data-theme", theme);
+  // }, [theme]);
 
 const {authUser,checkAuth,isCheckingAuth} =useAuthStore();
 useEffect(()=>{
@@ -38,8 +38,9 @@ if(isCheckingAuth&&!authUser){
   <Route path="/login" element={!authUser?<LogInPage/>:<Navigate to="/"/>}/>
   <Route path="/signup" element={!authUser?<SignUpPage/>:<Navigate to="/"/>}/>
   <Route path="/setting" element={<SettingPage/>}/>
-  {/* <Route path="/profile" element={authUser?<ProfilePage/>:<Navigate to="/login"/>}/> */}
-  <Route path="/profile" element={<ProfilePage/>}/>
+  <Route path="/profile" element={authUser?<ProfilePage/>:<Navigate to="/login"/>}/>
+  {/* <Route path="/profile" element={<ProfilePage/>}/> */}
+  {/* <Route path="/signup" element={<SignUpPage></SignUpPage>}/> */}
 </Routes>
 <Toaster></Toaster>
     </div>

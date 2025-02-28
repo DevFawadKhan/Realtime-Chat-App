@@ -11,10 +11,7 @@ function SignUpPage() {
     email:"",
     password:"",
   })
-  console.log(FoamData.name)
-  console.log(FoamData.email)
-  console.log(FoamData.password)
-const {signup}=useAuthStore();
+const {signup,isSignUp}=useAuthStore();
 const validateFoam = () => {
   let errors = []; // Errors store karne ke liye array
   if (!FoamData?.name) errors.push("Full name is required");
@@ -38,7 +35,7 @@ const handleSubmit=(e)=>{
     <>
     <div className="grid grid-cols-2 gap-2 bg-[#1C232A] ">
       {/* left side */}
-    <div className=" ">
+    <div>
       {/* Logo */}
       <div className="flex items-center justify-center h-screen flex-col">
       <MessageSquare className="text-[#5F67CE] bg-[#252E44] px-1 rounded-sm"/>
@@ -71,7 +68,7 @@ const handleSubmit=(e)=>{
       </div>
       {/* Button */}
       <div className="my-3 flex justify-center text-white  bg-[#5F67CE] p-2 rounded-lg ml-3 md:ml-9 lg:ml-0 w-32 lg:w-full">
-      <button className="cursor-pointer">Create Account</button>
+      <button className="cursor-pointer">{isSignUp?"Creating...":"Create Account"}</button>
       </div>
       </form>   
       {/* ALready account */}
