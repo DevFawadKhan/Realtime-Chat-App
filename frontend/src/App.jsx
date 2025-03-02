@@ -9,6 +9,7 @@ import { useAuthStore } from "./store/useAuthStore.js"
 import { useEffect } from "react"
 import {Loader} from 'lucide-react'
 import {Toaster} from 'react-hot-toast'
+import NoChatSelected from '../src/components/NoChatSelected.jsx'
 function App() {
   // const [theme, setTheme] = useState("cupcake");
 
@@ -39,8 +40,8 @@ if(isCheckingAuth&&!authUser){
   <Route path="/signup" element={!authUser?<SignUpPage/>:<Navigate to="/"/>}/>
   <Route path="/setting" element={<SettingPage/>}/>
   <Route path="/profile" element={authUser?<ProfilePage/>:<Navigate to="/login"/>}/>
-  {/* <Route path="/profile" element={<ProfilePage/>}/> */}
-  {/* <Route path="/signup" element={<SignUpPage></SignUpPage>}/> */}
+  <Route path="/no" element={<NoChatSelected></NoChatSelected>}/>
+   
 </Routes>
 <Toaster></Toaster>
     </div>

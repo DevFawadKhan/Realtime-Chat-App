@@ -28,7 +28,7 @@ function ProfilePage() {
     <h1 className="font-bold text-2xl my-2">Profile</h1>
     <p className='font-serif'>Your profile information</p>
     <div className=' relative  flex justify-center '>
-    <img className={`${selectedimg||authUser?.ProfilePic?"w-[90px] h-[80px] rounded-full border border-white":"h-[150px] border border-white rounded-full"}`} src={selectedimg||authUser?.ProfilePic||Avatar} alt="" />
+    <img className={`${selectedimg||authUser?.ProfilePic?"w-[90px] h-[80px] rounded-full border border-white":"h-[150px] border border-white rounded-full"}`} src={selectedimg||authUser?.ProfilePic||Avatar} alt="Dp" />
     <CameraIcon onClick={HandleCameraClick}className='text-white cursor-pointer absolute bg-gray-600 p-1 z-10 rounded bottom-1 border border-white'/>
     <input type="file" ref={fileInputRef} accept="image/*" onChange={HandleImageUpload}  className="absolute bottom-4 hidden"/>
     </div>
