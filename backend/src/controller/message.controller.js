@@ -16,7 +16,8 @@ try {
 // get Message controller
 export const getMessage=async(req,res)=>{
   try {
-    const {id:UserToChatId}=req.params;
+    const {UserId:UserToChatId}=req.params;
+    console.log(UserToChatId);
     const myId=req.user._id;  //middleware say arhi ha. 
     const Messages=await Message.find({
         $or:[{senderid:myId,recieverid:UserToChatId},{senderid:UserToChatId,recieverid:myId}]
