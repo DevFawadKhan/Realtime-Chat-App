@@ -1,21 +1,29 @@
 import { Users2Icon } from "lucide-react";
-
+import { useChatStore } from "../store/useChatStore";
+import { useEffect} from "react";
+import CardSkaleton from "./CardSkaleton";
+import Avatar from '../assets/Avatar.png'
 function SideBar() {
-  const users = [
-    { id: 1, name: "Jane Doe", status: "Offline", image: "https://images.pexels.com/photos/30913847/pexels-photo-30913847/free-photo-of-indoor-artistic-scene-with-calligraphy-and-cat.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" },
-    { id: 2, name: "John Smith", status: "Online", image: "https://images.pexels.com/photos/30913847/pexels-photo-30913847/free-photo-of-indoor-artistic-scene-with-calligraphy-and-cat.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" },
-    { id: 3, name: "John Smith", status: "Online", image: "https://images.pexels.com/photos/30913847/pexels-photo-30913847/free-photo-of-indoor-artistic-scene-with-calligraphy-and-cat.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" },
-    { id: 4, name: "John Smith", status: "Online", image: "https://images.pexels.com/photos/30913847/pexels-photo-30913847/free-photo-of-indoor-artistic-scene-with-calligraphy-and-cat.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" },
-        { id: 5, name: "John Smith", status: "Online", image: "https://images.pexels.com/photos/30913847/pexels-photo-30913847/free-photo-of-indoor-artistic-scene-with-calligraphy-and-cat.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" },   
-         { id: 6, name: "John Smith", status: "Online", image: "https://images.pexels.com/photos/30913847/pexels-photo-30913847/free-photo-of-indoor-artistic-scene-with-calligraphy-and-cat.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" },   
-          { id: 7, name: "John Smith", status: "Online", image: "https://images.pexels.com/photos/30913847/pexels-photo-30913847/free-photo-of-indoor-artistic-scene-with-calligraphy-and-cat.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" },  
-            { id: 8, name: "John Smith", status: "Online", image: "https://images.pexels.com/photos/30913847/pexels-photo-30913847/free-photo-of-indoor-artistic-scene-with-calligraphy-and-cat.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-             },
-             { id: 9, name: "John Smith", status: "Online", image: "https://images.pexels.com/photos/30913847/pexels-photo-30913847/free-photo-of-indoor-artistic-scene-with-calligraphy-and-cat.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" },
-             { id: 10, name: "John Smith", status: "Online", image: "https://images.pexels.com/photos/30913847/pexels-photo-30913847/free-photo-of-indoor-artistic-scene-with-calligraphy-and-cat.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" },
-             { id: 11, name: "John Smith", status: "Online", image: "https://images.pexels.com/photos/30913847/pexels-photo-30913847/free-photo-of-indoor-artistic-scene-with-calligraphy-and-cat.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" },
-             { id: 12, name: "John Smith", status: "Online", image: "https://images.pexels.com/photos/30913847/pexels-photo-30913847/free-photo-of-indoor-artistic-scene-with-calligraphy-and-cat.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" },
-  ];
+  const {users,isUserLoading,GetUsers,SetSlectedUser,selectedUser}=useChatStore();
+
+  //   { id: 1, name: "Jane Doe", status: "Offline", image: "https://images.pexels.com/photos/30913847/pexels-photo-30913847/free-photo-of-indoor-artistic-scene-with-calligraphy-and-cat.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" },
+  //   { id: 2, name: "John Smith", status: "Online", image: "https://images.pexels.com/photos/30913847/pexels-photo-30913847/free-photo-of-indoor-artistic-scene-with-calligraphy-and-cat.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" },
+  //   { id: 3, name: "John Smith", status: "Online", image: "https://images.pexels.com/photos/30913847/pexels-photo-30913847/free-photo-of-indoor-artistic-scene-with-calligraphy-and-cat.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" },
+  //   { id: 4, name: "John Smith", status: "Online", image: "https://images.pexels.com/photos/30913847/pexels-photo-30913847/free-photo-of-indoor-artistic-scene-with-calligraphy-and-cat.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" },
+  //       { id: 5, name: "John Smith", status: "Online", image: "https://images.pexels.com/photos/30913847/pexels-photo-30913847/free-photo-of-indoor-artistic-scene-with-calligraphy-and-cat.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" },   
+  //        { id: 6, name: "John Smith", status: "Online", image: "https://images.pexels.com/photos/30913847/pexels-photo-30913847/free-photo-of-indoor-artistic-scene-with-calligraphy-and-cat.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" },   
+  //         { id: 7, name: "John Smith", status: "Online", image: "https://images.pexels.com/photos/30913847/pexels-photo-30913847/free-photo-of-indoor-artistic-scene-with-calligraphy-and-cat.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" },  
+  //           { id: 8, name: "John Smith", status: "Online", image: "https://images.pexels.com/photos/30913847/pexels-photo-30913847/free-photo-of-indoor-artistic-scene-with-calligraphy-and-cat.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+  //            },
+  //            { id: 9, name: "John Smith", status: "Online", image: "https://images.pexels.com/photos/30913847/pexels-photo-30913847/free-photo-of-indoor-artistic-scene-with-calligraphy-and-cat.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" },
+  //            { id: 10, name: "John Smith", status: "Online", image: "https://images.pexels.com/photos/30913847/pexels-photo-30913847/free-photo-of-indoor-artistic-scene-with-calligraphy-and-cat.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" },
+  //            { id: 11, name: "John Smith", status: "Online", image: "https://images.pexels.com/photos/30913847/pexels-photo-30913847/free-photo-of-indoor-artistic-scene-with-calligraphy-and-cat.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" },
+  //            { id: 12, name: "John Smith", status: "Online", image: "https://images.pexels.com/photos/30913847/pexels-photo-30913847/free-photo-of-indoor-artistic-scene-with-calligraphy-and-cat.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" },
+  // ];
+  useEffect(()=>{
+    GetUsers()
+  },[GetUsers])
+  console.log(users);
   return (
     <aside className="bg-white h-screen  ">
       <div className="sticky top-0 h-24 bg-white shadow-lg ">
@@ -31,14 +39,20 @@ function SideBar() {
       </div>
       </div>
       <div className="h-screen ">
-  {users.map((value, index) => (
-    <div key={index} className="mt-5 pl-2 flex items-center bg-amber-900 h-[75px]">
-      <img className="w-[60px] h-[60px] rounded-full" src={value.image} alt="" />
-      <div className="ml-3 flex flex-col">
-        <h1 className="font-bold">{value.name}</h1>
-        <p className="text-gray-500">{value.status}</p>
-      </div>
-    </div>
+        {isUserLoading?<CardSkaleton/>:users.map((value) => (
+     <div 
+     key={value._id} 
+     onClick={() => SetSlectedUser(value)} 
+     className={`cursor-pointer mt-5 pl-2 flex items-center h-[75px] transition-all duration-300 
+       ${selectedUser?._id === value._id ?"bg-gray-300":""}`}
+   >
+     <img className="w-[60px] h-[60px] rounded-full" src={value.ProfilePic || Avatar} alt="" />
+     <div className="ml-3 flex flex-col">
+       <h1 className="font-bold">{value?.name}</h1>
+       <p>offline</p>
+       {console.log(selectedUser)}
+     </div>
+   </div>
   ))}
 </div>
     </aside>

@@ -9,14 +9,8 @@ import { useAuthStore } from "./store/useAuthStore.js"
 import { useEffect } from "react"
 import {Loader} from 'lucide-react'
 import {Toaster} from 'react-hot-toast'
-import NoChatSelected from '../src/components/NoChatSelected.jsx'
+import CardSkaleton from "./components/CardSkaleton.jsx"
 function App() {
-  // const [theme, setTheme] = useState("cupcake");
-
-  // useEffect(() => {
-  //   document.documentElement.setAttribute("data-theme", theme);
-  // }, [theme]);
-
 const {authUser,checkAuth,isCheckingAuth} =useAuthStore();
 useEffect(()=>{
 checkAuth();
@@ -40,7 +34,7 @@ if(isCheckingAuth&&!authUser){
   <Route path="/signup" element={!authUser?<SignUpPage/>:<Navigate to="/"/>}/>
   <Route path="/setting" element={<SettingPage/>}/>
   <Route path="/profile" element={authUser?<ProfilePage/>:<Navigate to="/login"/>}/>
-  <Route path="/no" element={<NoChatSelected></NoChatSelected>}/>
+  <Route path="/skaleton" element={<CardSkaleton></CardSkaleton>}/>
    
 </Routes>
 <Toaster></Toaster>

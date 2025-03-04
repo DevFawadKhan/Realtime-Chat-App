@@ -55,7 +55,7 @@ const handleSubmit=(e)=>{
       <div className="relative flex justify-center flex-col space-y-2">
       <label htmlFor="email" className="text-white ">Email</label>
       <Mail className="absolute left-1 mt-9 text-white"></Mail>
-      <input type="text" value={FoamData.email} onChange={(e)=>setFoamData((prev)=>({...prev,email:e.target.value}))}className="w-full rounded-lg m-[2px_1px] text-white border border-gray-200 pl-7 p-1 pe-12 text-sm shadow-xs lg:w-[40vh]" placeholder="Enter email" />
+      <input type="email" value={FoamData.email} onChange={(e)=>setFoamData((prev)=>({...prev,email:e.target.value}))}className="w-full rounded-lg m-[2px_1px] text-white border border-gray-200 pl-7 p-1 pe-12 text-sm shadow-xs lg:w-[40vh]" placeholder="Enter email" />
       </div>
       {/* password input */}
       <div className="relative flex justify-center flex-col space-y-2">
