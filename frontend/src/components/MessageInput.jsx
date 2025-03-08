@@ -1,11 +1,12 @@
 import { useState,useRef } from "react"
 import {X,Image,Send} from 'lucide-react'
 import toast from "react-hot-toast";
+import { useChatStore } from "../store/useChatStore";
 function MessageInput() {
     const [text, settext] = useState("")
     const [previmg, setprevimg] = useState(null)
     const fileinputRef=useRef(null);
-
+    const {SendMessage}=useChatStore();
     const handleImageChange=(e)=>{
      const file=e.target.files[0];
      if(!file.type.startsWith("image/")){
@@ -22,7 +23,20 @@ function MessageInput() {
     setprevimg(null);
     if(fileinputRef.current) fileinputRef.current.value=""
     }
-    const HandleSubmit=()=>{}
+    const HandleSubmit=async(e)=>{
+      e.preventDefault();
+        if(!text&&!previmg) return
+        try {
+          await SendMessage(text,previmg)
+          // clean input fields after send message
+          settext("")
+          setprevimg(null);
+
+          if(fileinputRef.current) fileinputRef.current.value=""
+        } catch (error) {
+          console.error("Failed to send message",error);
+        }
+    }
   return (
    <>
    <div className="w-full  p-4 bg-amber-500">
@@ -51,7 +65,7 @@ function MessageInput() {
     </div>
     {/* send button */}
     <button type="submit"  className={` px-4 py-2 rounded-md 
-    ${text.trim() || previmg ? "cursor-pointer text-white" : "cursor-not-allowed"}`} disabled={!text.trim()&&!previmg}>
+    ${text || previmg ? "cursor-pointer text-white" : "cursor-not-allowed"}`} disabled={!text&&!previmg}>
     <Send size={22}/>
     </button>
     </form>
