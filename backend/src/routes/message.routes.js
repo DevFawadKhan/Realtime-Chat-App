@@ -4,6 +4,6 @@ import {getUserForSidebar,getMessage,SendMessages} from '../controller/message.c
 const MessageRouter=express.Router();
 
 MessageRouter.get("/users",protectRoute,getUserForSidebar)
-MessageRouter.get("/:id",protectRoute,getMessage)
+MessageRouter.get("/:UserId",protectRoute,getMessage)
 MessageRouter.post("/send/:id",protectRoute,SendMessages)
 export default MessageRouter

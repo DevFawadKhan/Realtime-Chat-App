@@ -13,12 +13,12 @@ try {
     res.status(500).json({message:"Internal Server error"})
 }
 }
-// get Message controller
+// getall Messages controller 
 export const getMessage=async(req,res)=>{
   try {
     const {UserId:UserToChatId}=req.params;
-    console.log(UserToChatId);
-    const myId=req.user._id;  //middleware say arhi ha. 
+    console.log("chatuserid",UserToChatId);
+    const myId=req.user._id;  //middleware say arhi ha 
     const Messages=await Message.find({
         $or:[{senderid:myId,recieverid:UserToChatId},{senderid:UserToChatId,recieverid:myId}]
     })
@@ -49,7 +49,7 @@ export const SendMessages= async (req,res)=>{
         })
     await newMessage.save()
     // realtime functionality socket.io
-    req.status(200).json(newMessage);
+    return res.status(200).json({message:newMessage});
     } catch (error) {
     console.log("Error in SendMessages Controller ",error.message)
     res.status(500).json({message:"Internal Server error"})
