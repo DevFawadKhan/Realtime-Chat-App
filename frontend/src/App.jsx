@@ -11,10 +11,11 @@ import {Loader} from 'lucide-react'
 import {Toaster} from 'react-hot-toast'
 import CardSkaleton from "./components/CardSkaleton.jsx"
 function App() {
-const {authUser,checkAuth,isCheckingAuth} =useAuthStore();
+const {authUser,checkAuth,isCheckingAuth,OnlineUsers} =useAuthStore();
+console.log("onlineusers",{OnlineUsers});
 useEffect(()=>{
 checkAuth();
-},[checkAuth])
+},[checkAuth,OnlineUsers])
 
 console.log({authUser});
 if(isCheckingAuth&&!authUser){

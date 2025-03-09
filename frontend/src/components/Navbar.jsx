@@ -1,8 +1,16 @@
 import {MessageSquare,SettingsIcon,User,LucideDoorOpen} from 'lucide-react'
 import { useAuthStore } from '../store/useAuthStore.js'
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 function Navbar() {
   const {Logout,authUser}=useAuthStore();
+  const navigate=useNavigate();
+  // handle logout
+  const Handlelogout=async()=>{
+    await Logout()
+    console.log("Logged out successfully");
+    navigate("/login")
+  }
   return (
     <>
     <header>
@@ -32,7 +40,7 @@ function Navbar() {
      </Link>
     }
     {
-    authUser&& <div onClick={Logout} className='flex items-center gap-1 p-1 bg-[#181C22] rounded'>
+    authUser&& <div onClick={Handlelogout} className='flex items-center gap-1 p-1 bg-[#181C22] rounded'>
       <LucideDoorOpen />
       <span className='hidden lg:block md:block'>Logout</span>
     </div>

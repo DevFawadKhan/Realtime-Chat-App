@@ -5,7 +5,7 @@ import { DBConnect } from './src/lib/db.js'
 import dotenv from 'dotenv'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
-const app=express()
+import {io,server,app} from './src/lib/socket.io.js'
 dotenv.config()
 app.use(express.json({limit:'50mb'}));  //for havey image
 app.use(cookieParser());
@@ -16,7 +16,7 @@ app.use(cors({
 const PORT=process.env.PORT||3001
 app.use('/api/auth',authRoutes)
 app.use('/api/messages',MessageRouter)
- app.listen(PORT,()=>{
+server.listen(PORT,()=>{
     console.log(`Listing on ${PORT} PORT`)
     DBConnect()
 })

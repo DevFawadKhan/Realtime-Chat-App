@@ -1,6 +1,7 @@
 import Message from "../models/message.model.js";
 import User from "../models/user.model.js";
 import cloudinary from "../lib/cloudinary.js"
+import { getRecieverSocketId, io } from "../lib/socket.io.js";
 
 // get all users for sidebar controller
 export const getUserForSidebar=async (req,res)=>{
@@ -35,6 +36,8 @@ export const SendMessages= async (req,res)=>{
     try {
         const {text,image}=req.body;
         const {id:recieverId}=req.params;
+        console.log("Text",text);
+        console.log("image",image)
         const myId=req.user._id;
         let imageUrl   // for save url in db
         if(image){
@@ -45,10 +48,15 @@ export const SendMessages= async (req,res)=>{
         senderid:myId,
         recieverid:recieverId,
         text:text,
-        images:imageUrl
+        images:imageUrl,
+        createdAt: new Date().toISOString()
         })
     await newMessage.save()
     // realtime functionality socket.io
+    const RecieverSocketId=getRecieverSocketId(newMessage.recieverid);
+    if(RecieverSocketId){
+      io.to(RecieverSocketId).emit("newMessage",newMessage)
+    }
     return res.status(200).json({message:newMessage});
     } catch (error) {
     console.log("Error in SendMessages Controller ",error.message)
